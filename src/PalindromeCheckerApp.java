@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 public class PalindromeCheckerApp {
     public static void main (String[] args)
     {
@@ -7,61 +8,48 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
-        // Inject strategy at runtime
+        // Use Stack-based strategy (example algorithm)
         PalindromeStrategy strategy = new StackStrategy();
 
-        // Execute selected strategy
+        // Capture start time
+        long startTime = System.nanoTime();
+
         boolean result = strategy.check(input);
 
+        // Capture end time
+        long endTime = System.nanoTime();
+
+        long duration = endTime - startTime;
+
         System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time : " + duration + " ns");
 
         scanner.close();
     }
 }
 
 /**
- * =========================================================
- * INTERFACE – PalindromeStrategy
- * =========================================================
- *
- * This interface defines a contract for all
- * palindrome checking algorithms.
+ * Strategy Interface
  */
 interface PalindromeStrategy {
-
     boolean check(String input);
 }
 
 /**
- * =========================================================
- * CLASS – StackStrategy
- * =========================================================
- *
- * This class provides a Stack based implementation
- * of the PalindromeStrategy interface.
- *
- * It uses LIFO behavior to reverse characters
- * and compare them with the original sequence.
+ * Stack-based palindrome implementation
  */
 class StackStrategy implements PalindromeStrategy {
 
-    /**
-     * Implements palindrome validation using Stack.
-     *
-     * @param input String to validate
-     * @return true if palindrome, false otherwise
-     */
     public boolean check(String input) {
 
-        // Create a stack to store characters
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+        Stack<Character> stack = new Stack<>();
 
-        // Push each character of the input string onto the stack
+        // Push characters onto stack
         for (char c : input.toCharArray()) {
             stack.push(c);
         }
 
-        // Compare characters by popping from the stack
+        // Compare while popping
         for (char c : input.toCharArray()) {
             if (c != stack.pop()) {
                 return false;
