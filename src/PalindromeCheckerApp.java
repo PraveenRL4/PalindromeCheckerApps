@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 
+
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC9.
+     * Application entry point for UC10.
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
@@ -14,25 +15,24 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = sc.nextLine();
 
-        boolean result = check(input, 0, input.length() - 1);
+        // Step 1: Normalize string
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        System.out.println("Is Palindrome? : " + result);
+        // Step 2: Check palindrome
+        boolean isPalindrome = true;
+
+        for (int i = 0; i < normalized.length() / 2; i++) {
+
+            if (normalized.charAt(i) !=
+                    normalized.charAt(normalized.length() - 1 - i)) {
+
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Is Palindrome? : " + isPalindrome);
 
         sc.close();
-    }
-    private static boolean check(String s, int start, int end) {
-
-        // Base Condition: If pointers cross or meet
-        if (start >= end) {
-            return true;
-        }
-
-        // If mismatch found
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call (move inward)
-        return check(s, start + 1, end - 1);
     }
 }
