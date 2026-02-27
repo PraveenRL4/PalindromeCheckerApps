@@ -2,13 +2,8 @@ import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    /**
-     * Application entry point for UC3.
-     *
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         // Create Scanner object
         Scanner scanner = new Scanner(System.in);
 
@@ -16,22 +11,24 @@ public class PalindromeCheckerApp {
         System.out.print("Enter text: ");
         String input = scanner.nextLine();
 
-        boolean isPalindrome = true;
+        // Variable to store reversed string
+        String reversed = "";
 
-        // Loop only till half of the string length
-        for (int i = 0; i < input.length() / 2; i++) {
-
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+        // Iterate from the last character to the first
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);   // String concatenation
         }
 
+        // Compare original and reversed using equals()
+        boolean isPalindrome = input.equals(reversed);
+
         // Display result
-        System.out.println("Input text: " + input);
+        System.out.println("Original String : " + input);
+        System.out.println("Reversed String : " + reversed);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
 
         // Close scanner
         scanner.close();
+
     }
 }
